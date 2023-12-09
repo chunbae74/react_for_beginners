@@ -18,11 +18,13 @@
     * ex) const Title = () => { return (<h3></h3>); }
     */
     // 컴포넌트의 첫 알파벳은 '반드시' 대문자여야함. 소문자일 시 React와 JSX는 HTML태그라고 생각할 것.
-     const Title = () => (
+    /*
+    const Title = () => (
         <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
             Hello I'm a title
         </h3>
     );
+    */
     /*
     function Title() {
         return (
@@ -32,7 +34,7 @@
         );
     }
     */
-
+    /*
     const Button = () => (
         <button id="btn" style={{
                 backgroundColor: "tomato"
@@ -42,16 +44,25 @@
             Click me!
             </button>
             );
-            
+    */
     // 컴포넌트의 첫 알파벳은 '반드시' 대문자여야함. 소문자일 시 React와 JSX는 HTML태그라고 생각할 것.
     // 컴포넌트를 추가할 땐 HTML태그를 다루듯이 작성
+    /*
     const Container = () => (
         <div>
             <Title />
             <Button />     
         </div>
     );
-            
+    */
+
+    const Container = () => (
+        <div>
+            <h3 id="title" onMouseEnter={() => console.log("mouse enter")}>
+                Hello I'm a title
+            </h3>
+        </div>
+    );
     ReactDOM.render(<Container />, root);
 
     /*
