@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<body>
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script type="text/babel">
+    function App() {
+        const [minutes, setMinutes] = React.useState();
+        const onChange = (event) => {
+            setMinutes(event.target.value);
+        }
+        // js에는 이미 class, for 등이 존재하기에...
+        // JSX에서는 이를 className, htmlFor 등으로 써주어야 한다.
+        return (
+            <div>
+                <h1 className="hi">Super Converter</h1>
+                <label htmlFor="minutes">Minutes</label>
+                <input 
+                    value={minutes}
+                    id="minutes" 
+                    placeholder="Minutes" 
+                    type="number"
+                    onChange={onChange}
+                />
+                <label htmlFor="hours">Hours</label>
+                <input id="hours" placeholder="Hours" type="number" />
+                <h4>You want to Convert {minutes}</h4>
+            </div>
+        );
+    }
+            
+    const root = document.querySelector("#root");
+    ReactDOM.render(<App />, root);
+</script>
+</html>
