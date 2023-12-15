@@ -6,41 +6,114 @@
 <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
 <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 <script type="text/babel">
-    function App() {
-        const [minutes, setMinutes] = React.useState();
+    function MinutesToHours() {
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
         const onChange = (event) => {
-            setMinutes(event.target.value);
+            setAmount(event.target.value);
         }
 
-        const reset = () => setMinutes(0);
-
+        const reset = () => setAmount(0);
+        const onFlip = () => {
+            reset();
+            setFlipped(current => !current);
+        }
         // js에는 이미 class, for 등이 존재하기에...
         // JSX에서는 이를 className, htmlFor 등으로 써주어야 한다.
         return (
             <div>
-                <h1 className="hi">Super Converter</h1>
                 <div>    
                     <label htmlFor="minutes">Minutes</label>
                     <input 
-                    value={minutes}
+                    value={flipped ? amount * 60 : amount}
                     id="minutes" 
                     placeholder="Minutes" 
                     type="number"
                     onChange={onChange}
+                    disabled={flipped}
                     />
                 </div>
 
                 <div>
                     <label htmlFor="hours">Hours</label>
                     <input 
-                        value={minutes / 60}    
+                        value={flipped ? amount : amount / 60}    
                         id="hours" 
                         placeholder="Hours" 
                         type="number"
-                        disabled
+                        onChange={onChange}
+                        disabled={!flipped}
                     />
                 </div>
                 <button onClick={reset}>Reset</button>
+                <button onClick={onFlip}>Flip</button>
+            </div>
+        );
+    }
+    
+    function KmToMiles() {
+        const [amount, setAmount] = React.useState(0);
+        const [flipped, setFlipped] = React.useState(false);
+        
+        const onChange = (event) => setAmount(event.target.value);
+        const reset = () => setAmount(0);
+        const flip = () => {
+            reset();
+            setFlipped(current => !current);
+        }
+        
+        return (
+            <div>
+                <div>
+                    <label htmlFor="Km">Km</label>
+                    <input 
+                        value={flipped ? amount * 1.61 : amount}
+                        id="Km" 
+                        placeholder="Km" 
+                        type="number"
+                        onChange={onChange}
+                        disabled={flipped}
+                    />
+                    </div>
+                    
+                <div>
+                    <label htmlFor="Miles">Miles</label>
+                    <input 
+                        value={flipped ? amount : amount / 1.61}
+                        id="Miles" 
+                        placeholder="Miles" 
+                        type="number"
+                        onChange={onChange}
+                        disabled={!flipped}
+                    />    
+                </div>
+
+                <button onClick={reset}>Reset</button>
+                <button onClick={flip}>Flip</button>
+            </div>
+        );
+    }
+
+    function App() {
+        const [index, setIndex] = React.useState("-1");
+
+        const onSelect = (event) => {
+            setIndex(event.target.value);
+        }
+
+        // jsx에서 js를 사용하는 법 : {} 열면 됨
+        return (
+            <div>
+                <h1 className="hi">Super Converter</h1>
+                <select value={index} onChange={onSelect}>
+                    <option value="-1">Select you units</option>
+                    <option value="0">Minutes & Hours</option>    
+                    <option value="1">Km & Miles</option>
+                </select>
+                <hr />
+                {index === "-1" ? "Please select your units" : null}
+                {index === "0" ? <MinutesToHours /> : null}
+                {index === "1" ? <KmToMiles /> : null}
             </div>
         );
     }
