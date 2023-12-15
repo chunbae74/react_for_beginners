@@ -11,22 +11,36 @@
         const onChange = (event) => {
             setMinutes(event.target.value);
         }
+
+        const reset = () => setMinutes(0);
+
         // js에는 이미 class, for 등이 존재하기에...
         // JSX에서는 이를 className, htmlFor 등으로 써주어야 한다.
         return (
             <div>
                 <h1 className="hi">Super Converter</h1>
-                <label htmlFor="minutes">Minutes</label>
-                <input 
+                <div>    
+                    <label htmlFor="minutes">Minutes</label>
+                    <input 
                     value={minutes}
                     id="minutes" 
                     placeholder="Minutes" 
                     type="number"
                     onChange={onChange}
-                />
-                <label htmlFor="hours">Hours</label>
-                <input id="hours" placeholder="Hours" type="number" />
-                <h4>You want to Convert {minutes}</h4>
+                    />
+                </div>
+
+                <div>
+                    <label htmlFor="hours">Hours</label>
+                    <input 
+                        value={minutes / 60}    
+                        id="hours" 
+                        placeholder="Hours" 
+                        type="number"
+                        disabled
+                    />
+                </div>
+                <button onClick={reset}>Reset</button>
             </div>
         );
     }
